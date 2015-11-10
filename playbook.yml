@@ -72,7 +72,7 @@
     - name: Add Claims Based Provider Trust on ADFS Server
       script: files/ADFSClaimsProviderTrust.ps1
     - name: Add Relying party Trust on ADFS Server for Internal Access
-      script: files/ADFSRelyingPartyTrustInternal.ps1 {{FederationURL_Internal}}
+      script: files/ADFSRelyingPartyTrust.ps1 {{FederationURL_Internal}} {{TrustName_Internal}}
     - name: Enable Forms Based Authentication on ADFS Server
       script: files/EnableFormsBasedAuthentication.ps1
 
@@ -87,15 +87,8 @@
   hosts: deploy_server
   gather_facts: false
   tasks:
-    - name: Reboot All Servers
+    - name: Reboot Deploy Server
       raw: shutdown -r -f
-
-- name: Configure ADFS Server
-  hosts: adfs_server
-  gather_facts: false
-  tasks:
-    - name: Add Relying party Trust on ADFS Server for External Access
-      script: files/ADFSRelyingPartyTrustExternal.ps1 {{FederationURL_External}}
     - name: wait for Deploy Server to reboot
       local_action:
         module: wait_for
@@ -104,6 +97,13 @@
         delay: 90
         timeout: 600
         state: started
+
+- name: Configure ADFS Server
+  hosts: adfs_server
+  gather_facts: false
+  tasks:
+    - name: Add Relying party Trust on ADFS Server for External Access
+      script: files/ADFSRelyingPartyTrust.ps1 {{FederationURL_External}} {{TrustName_External}}
 
 - name: All Servers
   hosts: deploy_server:adfs_server:fe_servers:be_servers
