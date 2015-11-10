@@ -1,0 +1,37 @@
+#t is suggested that these be encrypted with ansible-vault:
+# ansible-vault edit group_vars/launched.yml
+
+[FE_Servers]
+ansible_ssh_port: 5986
+ansible_connection: winrm
+ansible_ssh_user: Administrator
+ansible_ssh_pass: NZFW6!2!BpT
+
+[BE_Servers]
+ansible_ssh_port: 5986
+ansible_connection: winrm
+ansible_ssh_user: Administrator
+ansible_ssh_pass: NZFW6!2!BpT
+
+[Deploy_Server]
+ansible_ssh_port: 5986
+ansible_connection: winrm
+ansible_ssh_user: Administrator
+ansible_ssh_pass: NZFW6!2!BpT
+
+[ADFS_Server]
+ansible_ssh_port: 5986
+ansible_connection: winrm
+ansible_ssh_user: Administrator
+ansible_ssh_pass: NZFW6!2!BpT
+
+[CRM_Servers:children]
+FE_Servers
+BE_Servers
+
+[All_Servers:children]
+Deploy_Server
+ADFS_Server
+FE_Servers
+BE_Servers
+
