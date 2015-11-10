@@ -83,20 +83,12 @@
     - name: Configure Internet Facing Deployment on CRM
       script: files/InternetFacingDeployment.ps1 "{{crmUser}}" {{crmUserPassword}} {{DwsServerUrl_https}} {{WebApplicationRootDomain}} {{OrganizationWebServiceRootDomain}} {{DiscoveryWebServiceRootDomain}} {{ExternalDomain}}
 
-- name: Deploy Server
-  hosts: deploy_server
+- name: Deploy Server And FEServers
+  hosts: deploy_server:fe_servers
   gather_facts: false
   tasks:
-    - name: Reboot Deploy Server
-      raw: shutdown -r -f
-    - name: wait for Deploy Server to reboot
-      local_action:
-        module: wait_for
-        host: "{{ ansible_ssh_host|default(inventory_hostname) }}"
-        port: "{{ ansible_ssh_port|default(5985) }}"
-        delay: 90
-        timeout: 600
-        state: started
+    - name: Reset IIS Services on Deploy Server and FE Servers
+      raw: iisreset
 
 - name: Configure ADFS Server
   hosts: adfs_server
