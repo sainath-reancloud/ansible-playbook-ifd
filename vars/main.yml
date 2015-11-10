@@ -1,49 +1,52 @@
 ---
 
-FEServers: "54.88.255.189,54.86.251.224"
-BEServers: "52.91.88.96,54.86.29.198"
-DeployServer: "54.85.150.21"
-ADFSServer: "54.88.25.18"
+FEServers: 
+BEServers: 
+DeployServer: 
+ADFSServer: 
+
+# dnetBIOS
+dnetBIOS: 
 
 # crm user
-crmUser: "ecrm\\crmadmin"
+crmUser: "{{dnetBIOS}}\\crmadmin"
 crmUserPassword: "R3cruit3r"
 
 # Deployment WebServer Url
-DwsServerUrl_http: "http://crmdeploy.ecrm.local"
-DwsServerUrl_https: "https://crmdeploy.ecrm.local"
+DwsServerUrl_http: 
+DwsServerUrl_https: 
 
 # WebAddress Settings
 RootDomainScheme: "https"
-WebAppRootDomain: "fe01.ecrm.local"
-SdkRootDomain: "fe01.ecrm.local"
-DiscoveryRootDomain: "fe01.ecrm.local"
-DeploymentSdkRootDomain: "crmdeploy.ecrm.local"
+WebAppRootDomain: 
+SdkRootDomain: 
+DiscoveryRootDomain: 
+DeploymentSdkRootDomain: 
 NlbEnabled: "true"
 SslHeader: 
 
 # certificate
-Certificate: "'CN=*.ecrm.local'"
+Certificate: 
 
 # https bindings
 CertPath: "CERT:\\LocalMachine\\My"
 
 # claims based authentication
-FederationURL_Claims: "https://adfs01.ecrm.local/federationmetadata/2007-06/federationmetadata.xml"
+FederationURL_Claims: 
 
 # Relying Party Trust Internal
-FederationURL_Internal: "https://fe01.ecrm.local"
-TrustName_Internal: "CRMRelyingTrust"
+FederationURL_Internal: 
+TrustName_Internal: 
 
 # Relying Party Trust External
-FederationURL_External: "https://auth.ecrm.local"
-TrustName_External: "AuthRelyingTrust"
+FederationURL_External: 
+TrustName_External: 
 
 # ifd settings
-WebApplicationRootDomain: "ecrm.local"
-OrganizationWebServiceRootDomain: "ecrm.local"
-DiscoveryWebServiceRootDomain: "dev.ecrm.local"
+WebApplicationRootDomain: 
+OrganizationWebServiceRootDomain: 
+DiscoveryWebServiceRootDomain: 
 # eg of External Domain https://auth.greatvalleyu.com/
-ExternalDomain: "https://auth.ecrm.local/"
+ExternalDomain: 
 
 

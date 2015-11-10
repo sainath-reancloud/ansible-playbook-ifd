@@ -1,15 +1,12 @@
 ---
 
-FEServers: 
-BEServers: 
-DeployServer: 
-ADFSServer: 
-
-# dnetBIOS
-dnetBIOS: 
+FEServers: "54.88.255.189,54.86.251.224"
+BEServers: "52.91.88.96,54.86.29.198"
+DeployServer: "54.85.150.21"
+ADFSServer: "54.88.25.18"
 
 # crm user
-crmUser: "{{dnetBIOS}}\\crmadmin"
+crmUser: "ecrm\\crmadmin"
 crmUserPassword: "R3cruit3r"
 
 # Deployment WebServer Url
