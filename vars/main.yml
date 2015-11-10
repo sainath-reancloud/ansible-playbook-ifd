@@ -36,11 +36,9 @@ FederationURL_Claims:
 
 # Relying Party Trust Internal
 FederationURL_Internal: 
-TrustName_Internal: 
 
 # Relying Party Trust External
-FederationURL_External: 
-TrustName_External: 
+FederationURL_External:  
 
 # ifd settings
 WebApplicationRootDomain: 
