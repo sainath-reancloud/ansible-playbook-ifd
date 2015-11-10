@@ -6,6 +6,8 @@ param (
     [string]$FederationURL
 )
 
+$FederationURL = $FederationURL + "/FederationMetadata/2007-06/FederationMetadata.xml"
+
 $AccountPasswordAsSecureString = $crmUserPassword | ConvertTo-SecureString -Force -AsPlainText
 $credential = New-Object System.Management.Automation.PsCredential($crmUser,$AccountPasswordAsSecureString)
 

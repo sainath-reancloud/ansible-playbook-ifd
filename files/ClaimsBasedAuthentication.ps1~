@@ -18,3 +18,5 @@ $claims.EncryptionCertificate = $CertName
 $claims.FederationMetadataUrl = $FederationURL
 
 Set-CrmSetting $claims -DwsServerUrl $DwsServerUrl -Credential $credential
+
+$claims
