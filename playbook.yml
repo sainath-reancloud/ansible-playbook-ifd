@@ -42,28 +42,23 @@
   tasks:
     - include_vars: vars/main.yml
 
+- name: Configure ADFS Server
+  hosts: adfs_server
+  gather_facts: false
+  tasks:
+    - name: Install and Configure ADFS
+      script: files/InstallADFS.ps1 {{domain}} "{{crmUser}}" {{crmUserPassword}} "{{adfsDisplayName}}"
+
 - name: Configure Deploy Server
   hosts: deploy_server
   gather_facts: false
   tasks:
     - name: Change HTTP CRM WebAddress Settings to HTTPS
-      script: files/CrmWebAddressSettings.ps1 "{{crmUser}}" {{crmUserPassword}} {{DwsServerUrl_http}} {{RootDomainScheme}} {{WebAppRootDomain}} {{SdkRootDomain}} {{DiscoveryRootDomain}} {{DeploymentSdkRootDomain}} {{NlbEnabled}}
-    - name: Enable Https Binding on IIS
-      script: files/HttpsBinding.ps1 "{{CertPath}}" "{{Certificate}}"
-
-- name: Configure FE
-  hosts: fe_servers
-  gather_facts: false
-  tasks:
-    - name: Enable Https Binding on IIS
-      script: files/HttpsBinding.ps1 "{{CertPath}}" "{{Certificate}}"
-
-- name: Configure Deploy Server
-  hosts: deploy_server
-  gather_facts: false
-  tasks:
+      script: files/CrmWebAddressSettings.ps1 "{{crmUser}}" {{crmUserPassword}} {{DwsServerUrl_https}} {{RootDomainScheme}} {{WebAppRootDomain}} {{SdkRootDomain}} {{DiscoveryRootDomain}} {{DeploymentSdkRootDomain}} {{NlbEnabled}}
     - name: Enable Claims Based Authentication for Internal Access
       script: files/ClaimsBasedAuthentication.ps1 "{{crmUser}}" {{crmUserPassword}} {{DwsServerUrl_https}} "{{Certificate}}" {{FederationURL_Claims}}
+    - name: Enable Trace Settings
+      script: files/TraceSettings.ps1 "{{crmUser}}" {{crmUserPassword}} {{DwsServerUrl_https}} {{TraceEnabled}} {{CallStack}} "{{Categories}}" "{{Directory}}" {{FileSize}}
 
 - name: Configure ADFS Server
   hosts: adfs_server
@@ -83,11 +78,11 @@
     - name: Configure Internet Facing Deployment on CRM
       script: files/InternetFacingDeployment.ps1 "{{crmUser}}" {{crmUserPassword}} {{DwsServerUrl_https}} {{WebApplicationRootDomain}} {{OrganizationWebServiceRootDomain}} {{DiscoveryWebServiceRootDomain}} {{ExternalDomain}}
 
-- name: Deploy Server And FEServers
-  hosts: deploy_server:fe_servers
+- name: All Servers
+  hosts: deploy_server:adfs_server:fe_servers:be_servers
   gather_facts: false
   tasks:
-    - name: Reset IIS Services on Deploy Server and FE Servers
+    - name: Reset IIS Services on All Servers
       raw: iisreset
 
 - name: Configure ADFS Server

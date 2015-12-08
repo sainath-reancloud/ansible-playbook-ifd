@@ -2,7 +2,7 @@ param (
     [string]$crmUser,
     [string]$crmUserPassword,
     [string]$DwsServerUrl,
-    [string]$CertName,
+    [string]$Certificate,
     [string]$FederationURL
 )
 
@@ -15,6 +15,8 @@ Add-PSSnapin Microsoft.Crm.PowerShell
 
 $claims = Get-CrmSetting -SettingType "ClaimsSettings" -DwsServerUrl $DwsServerUrl -Credential $credential
 $claims.Enabled = $true
+
+$CertName = (Get-ChildItem -Path Cert:\LocalMachine\my | Where-Object {$_.Subject -match "$Certificate"}).SubjectName.Name
 
 $claims.EncryptionCertificate = $CertName
 $claims.FederationMetadataUrl = $FederationURL

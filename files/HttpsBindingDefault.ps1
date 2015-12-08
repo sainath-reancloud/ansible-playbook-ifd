@@ -5,7 +5,7 @@ param(
     [string]$CertWildCard
 )
 
-$Name = "Microsoft Dynamics CRM"
+$Name = "Default Web Site"
 $IPAddress = "*"
 
 $ErrorActionPreference = "Stop";

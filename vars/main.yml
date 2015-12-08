@@ -1,52 +1,65 @@
 ---
 
-FEServers: 
-BEServers: 
-DeployServer: 
-ADFSServer: 
+FEServers: "52.91.24.187"
+BEServers: "54.165.50.78"
+DeployServer: "52.91.20.125"
+ADFSServer: "52.90.176.0"
+
+# domain
+domain: "core-staging.devops.greatvalleyu.com"
 
 # dnetBIOS
-dnetBIOS: 
+dnetBIOS: "core-staging"
+
+# adfs
+adfsDisplayName: "'LogIn To CRM 2015'"
 
 # crm user
 crmUser: "{{dnetBIOS}}\\crmadmin"
 crmUserPassword: "R3cruit3r"
 
 # Deployment WebServer Url
-DwsServerUrl_http: 
-DwsServerUrl_https: 
+DwsServerUrl_https: "https://crmdeploy.core-staging.devops.greatvalleyu.com"
 
 # WebAddress Settings
 RootDomainScheme: "https"
-WebAppRootDomain: 
-SdkRootDomain: 
-DiscoveryRootDomain: 
-DeploymentSdkRootDomain: 
+WebAppRootDomain: "fe01.core-staging.devops.greatvalleyu.com"
+SdkRootDomain: "fe01.core-staging.devops.greatvalleyu.com"
+DiscoveryRootDomain: "fe01.core-staging.devops.greatvalleyu.com"
+DeploymentSdkRootDomain: "crmdeploy.core-staging.devops.greatvalleyu.com"
 NlbEnabled: "true"
 SslHeader: 
 
+# TraceSettings
+TraceEnabled: "true"
+CallStack: "true"
+Categories: "'*:Verbose'"
+Directory: "'C:\\Program Files\\Microsoft Dynamics CRM\\Trace'"
+FileSize: "10"
+
 # certificate
-Certificate: 
+Certificate: "'core-staging.devops.greatvalleyu.com'"
 
 # https bindings
 CertPath: "CERT:\\LocalMachine\\My"
 
 # claims based authentication
-FederationURL_Claims: 
+# "https://adfs.core-staging.devops.greatvalleyu.com/FederationMetadata/2007-06/FederationMetadata.xml"
+FederationURL_Claims: "https://adfs.core-staging.devops.greatvalleyu.com"
 
 # Relying Party Trust Internal
-FederationURL_Internal: 
-TrustName_Internal: 
+FederationURL_Internal: "https://fe01.core-staging.devops.greatvalleyu.com"
+TrustName_Internal: "CRMRelyingTrust"
 
 # Relying Party Trust External
-FederationURL_External: 
-TrustName_External: 
+FederationURL_External: "https://auth.core-staging.devops.greatvalleyu.com"
+TrustName_External: "AuthRelyingTrust"
 
 # ifd settings
-WebApplicationRootDomain: 
-OrganizationWebServiceRootDomain: 
-DiscoveryWebServiceRootDomain: 
+WebApplicationRootDomain: "core-staging.devops.greatvalleyu.com"
+OrganizationWebServiceRootDomain: "core-staging.devops.greatvalleyu.com"
+DiscoveryWebServiceRootDomain: "dev.core-staging.devops.greatvalleyu.com"
 # eg of External Domain https://auth.greatvalleyu.com/
-ExternalDomain: 
+ExternalDomain: "https://auth.core-staging.devops.greatvalleyu.com/"
 
 
