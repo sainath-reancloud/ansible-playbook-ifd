@@ -59,6 +59,15 @@
       script: files/ClaimsBasedAuthentication.ps1 "{{crmUser}}" {{crmUserPassword}} {{DwsServerUrl_https}} "{{Certificate}}" {{FederationURL_Claims}}
     - name: Enable Trace Settings
       script: files/TraceSettings.ps1 "{{crmUser}}" {{crmUserPassword}} {{DwsServerUrl_https}} {{TraceEnabled}} {{CallStack}} "{{Categories}}" "{{Directory}}" {{FileSize}}
+    - name: Enable useAppPoolCredentials in IIS
+      script: files/AppPool.ps1
+
+- name: Configure FE Servers
+  hosts: fe_servers
+  gather_facts: false
+  tasks:
+    - name: Enable useAppPoolCredentials in IIS
+      script: files/AppPool.ps1
 
 - name: Configure ADFS Server
   hosts: adfs_server
